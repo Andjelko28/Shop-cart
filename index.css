@@ -1,0 +1,14 @@
+nav{
+    display: flex;
+    width: 80%;
+    max-width: 80%;
+    background-color: black;
+    margin: auto;
+    justify-content: end;
+}
+
+nav a{
+    color: white;
+    text-decoration: none;
+}
+
