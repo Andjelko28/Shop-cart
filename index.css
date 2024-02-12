@@ -10,5 +10,11 @@ nav{
 nav a{
     color: white;
     text-decoration: none;
+    font-size: 3em;
+    margin-right: 40px;
 }
 
+.options {
+    display: flex;
+    background-color: black;
+}
