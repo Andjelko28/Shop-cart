@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css" />
-    <script defer src="index.js"></script>
     <title>Document</title>
   </head>
 
@@ -19,12 +18,12 @@
         <button class="dropdown-toggle">Filter by</button>
       </div>
       <div class="dropdown">
-        <button class="dropdown-toggle">Sort by</button>
+        <button class="dropdown-toggle">Sort by price</button>
         <div class="dropdown-menu">
-          <a href="#" class="dropdown-items">A - Z</a>
-          <a href="#" class="dropdown-items">Z - A</a>
-          <a href="#" class="dropdown-items">Highest - Lowest</a>
-          <a href="#" class="dropdown-items">Lowest - Highest</a>
+          <a href="#" class="dropdown-items" id="option1">A - Z</a>
+          <a href="#" class="dropdown-items" id="option2">Z - A</a>
+          <a href="#" class="dropdown-items" id="option3">Highest - Lowest</a>
+          <a href="#" class="dropdown-items" id="option4">Lowest - Highest</a>
         </div>
       </div>
     </div>
@@ -37,11 +36,12 @@
           <th>Price</th>
           <th>Fuel type</th>
           <th>Action</th>
-          <tbody id="data-output">
-            
-          </tbody>
+          <tbody id="data-output"></tbody>
         </tr>
       </thead>
     </table>
+
+    
+    <script defer src="index.js"></script>
   </body>
 </html>
