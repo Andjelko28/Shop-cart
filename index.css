@@ -18,7 +18,6 @@ nav a{
     max-width: 80%;
     margin: auto;
     margin-top: 70px ;
-    background-color: black;
     justify-content: space-evenly;
     font-size: 1.5em;
     color: white;
@@ -35,14 +34,32 @@ img{
 
 table{
     border: 1px solid black;
-    border-collapse:collapse ;
     margin: auto;
+    margin-top: 30px;
     text-align: center;
     max-width: 80%;
     font-size: 1.5em;
     border-spacing: 30px;
 }
 
-tr{
-    border-collapse: 1px solid black;
+.dropdown{
+    display: inline-block;
 }
+
+.dropdown-toggle{
+    font-size: 1em;
+}
+
+.dropdown-menu{
+display: none;
+}
+
+.dropdown:hover .dropdown-menu{
+    display: block;
+}
+
+.dropdown-menu a{
+    display: block;
+    font-size: 0.8em;
+}
+
