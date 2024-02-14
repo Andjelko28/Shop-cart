@@ -22,8 +22,6 @@ const data = [
   },
 ];
 
-const sortBtnHigh = document.querySelector("#option1");
-const sortBtnLow = document.querySelector("#option2");
 const table = document.querySelector("#data-output");
 
 function tableCreator() {
@@ -36,6 +34,8 @@ function tableCreator() {
         <td>${d.year}</td>
         <td>${d.price}</td>
         <td>${d.fuel}</td>
+        <td><button>Add to cart</button></td>
+        <td><button class='remove'>Clear</button></td>
         </tr>`;
     }
     table.innerHTML = output;
@@ -43,44 +43,35 @@ function tableCreator() {
   return { dataTable };
 }
 
-function sorting() {
-  function sortAZ(param) {
-    param.sort(function (a, b) {
-      if (a.brand < b.brand) {
-        return -1;
-      }
-      if (a.brand > b.brand) {
-        return 1;
-      }
-      return 0;
-    });
+function sort() {
+  function sorting(data, sortBy) {
+    if (sortBy === "brand") {
+      return data.sort((a, b) => (a.brand > b.brand ? 1 : -1));
+    } else if (sortBy === "year") {
+      return data.sort((a, b) => a.year - b.year);
+    } else if (sortBy === "price") {
+      return data.sort((a, b) => b.price - a.price);
+    }
   }
-
-  function sortZA(param) {
-    param.sort(function (a, b) {
-      if (b.brand < a.brand) {
-        return -1;
-      }
-      if (b.brand > a.brand) {
-        return 1;
-      }
-      return 0;
-    });
-  }
-
-  return { sortAZ,sortZA };
+  return { sorting };
 }
 
 const creator = tableCreator();
 creator.dataTable();
-const sort = sorting();
+const sortTable = sort();
 
-sortBtnHigh.addEventListener("click", () => {
-  sort.sortAZ(data);
-  creator.dataTable();
-});
+const selectElement = document
+  .querySelector("#sort")
+  .addEventListener("change", (event) => {
+    sortTable.sorting(data, event.target.value);
+    creator.dataTable();
+  });
 
-sortBtnLow.addEventListener("click", () => {
-  sort.sortZA(data);
-  creator.dataTable();
+const clearBtn = document.querySelectorAll(".remove");
+
+clearBtn.forEach((button) => {
+  button.addEventListener("click", () => {
+    const row = button.closest("tr");
+    row.remove();
+  });
 });

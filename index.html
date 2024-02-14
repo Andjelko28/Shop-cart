@@ -14,17 +14,19 @@
       </div>
     </nav>
     <div class="options">
-      <div class="dropdown">
-        <button class="dropdown-toggle">Filter by</button>
-      </div>
-      <div class="dropdown">
-        <button class="dropdown-toggle">Sort by price</button>
-        <div class="dropdown-menu">
-          <a href="#" class="dropdown-items" id="option1">A - Z</a>
-          <a href="#" class="dropdown-items" id="option2">Z - A</a>
-          <a href="#" class="dropdown-items" id="option3">Highest - Lowest</a>
-          <a href="#" class="dropdown-items" id="option4">Lowest - Highest</a>
-        </div>
+      <select value="" id="filter">
+        <option>Filter by</option>
+        <option name="" value="Toyota">Toyota</option>
+        <option name="" value="Audi">Audi</option>
+        <option name="" value="Diesel">Diesel</option>
+        <option name="" value="Petrol">Petrol</option>
+      </select>
+      <select value="" id="sort">
+        <option>Sort by</option>
+        <option name="" id="" value="brand">A - Z</option>
+        <option name="" id="" value="year">Model year</option>
+        <option name="" id="" value="price">High - Low</option>
+      </select>
       </div>
     </div>
     <table>
