@@ -25,9 +25,9 @@ const data = [
 const table = document.querySelector("#data-output");
 
 function tableCreator() {
-  function dataTable() {
+  function dataTable(param) {
     let output = "";
-    for (d of data) {
+    for (d of param) {
       output += `<tr>
         <td>${d.brand}</td>
         <td>${d.model}</td>
@@ -43,7 +43,7 @@ function tableCreator() {
   return { dataTable };
 }
 
-function sort() {
+function sortAndFilter() {
   function sorting(data, sortBy) {
     if (sortBy === "brand") {
       return data.sort((a, b) => (a.brand > b.brand ? 1 : -1));
@@ -53,18 +53,37 @@ function sort() {
       return data.sort((a, b) => b.price - a.price);
     }
   }
-  return { sorting };
+
+
+  // Filtriranje tabele po kategorijama
+  function filterData(data, selectedValue) {
+    if (selectedValue === "Toyota" || selectedValue === "Audi") {
+      return data.filter(data => data.brand === selectedValue);
+    } else if (selectedValue === "Diesel" || selectedValue === "Petrol") {
+      return data.filter(data => data.fuel === selectedValue);
+    } else {
+      return data;
+    }
+  }
+  return { sorting, filterData };
 }
 
 const creator = tableCreator();
-creator.dataTable();
-const sortTable = sort();
+creator.dataTable(data);
+const sortTable = sortAndFilter();
 
-const selectElement = document
+const filterElements = document
+  .querySelector("#filter") // Kreiranje varijable sa filtriranim podacima i update tabele samtim podacima
+  .addEventListener("change", (event) => {
+    const filteredData = sortTable.filterData(data, event.target.value);
+    creator.dataTable(filteredData);
+  });
+
+const sortElements = document
   .querySelector("#sort")
   .addEventListener("change", (event) => {
     sortTable.sorting(data, event.target.value);
-    creator.dataTable();
+    creator.dataTable(data);
   });
 
 const clearBtn = document.querySelectorAll(".remove");
