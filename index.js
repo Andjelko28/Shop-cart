@@ -1,4 +1,4 @@
-const data = [
+const cars = [
   {
     brand: "Toyota",
     model: "Camry",
@@ -21,8 +21,27 @@ const data = [
     fuel: "Petrol",
   },
 ];
-
 const table = document.querySelector("#data-output");
+
+function setGetCars() {
+  let currentCars = [];
+
+  function setCurrentCars(param) {
+    currentCars = param;
+  }
+
+  function getCurrentCars() {
+    return currentCars;
+  }
+
+  function newCarsArray(param, key, value){
+    return sortTable.filterData(param, key, value)
+  }
+
+  return { setCurrentCars, getCurrentCars, newCarsArray };
+}
+
+
 
 function tableCreator() {
   function dataTable(param) {
@@ -54,36 +73,32 @@ function sortAndFilter() {
     }
   }
 
-
   // Filtriranje tabele po kategorijama
-  function filterData(data, selectedValue) {
-    if (selectedValue === "Toyota" || selectedValue === "Audi") {
-      return data.filter(data => data.brand === selectedValue);
-    } else if (selectedValue === "Diesel" || selectedValue === "Petrol") {
-      return data.filter(data => data.fuel === selectedValue);
-    } else {
-      return data;
-    }
+  function filterData(param,key, value,) {
+    const newCars = param.filter((el) => el[key] === value);
+    setGetCarsTable.setCurrentCars(newCars);
+    return newCars;
   }
   return { sorting, filterData };
 }
 
+const setGetCarsTable = setGetCars();
 const creator = tableCreator();
-creator.dataTable(data);
+creator.dataTable(cars);
 const sortTable = sortAndFilter();
 
 const filterElements = document
-  .querySelector("#filter") // Kreiranje varijable sa filtriranim podacima i update tabele samtim podacima
+  .querySelector("#filter") 
   .addEventListener("change", (event) => {
-    const filteredData = sortTable.filterData(data, event.target.value);
-    creator.dataTable(filteredData);
+    const [key, value] = event.target.value.split("-");
+    creator.dataTable(setGetCarsTable.newCarsArray(cars, key, value));
   });
 
 const sortElements = document
   .querySelector("#sort")
   .addEventListener("change", (event) => {
-    sortTable.sorting(data, event.target.value);
-    creator.dataTable(data);
+    sortTable.sorting(cars, event.target.value);
+    creator.dataTable(cars);
   });
 
 const clearBtn = document.querySelectorAll(".remove");
